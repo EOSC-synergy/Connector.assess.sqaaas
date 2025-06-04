@@ -1,0 +1,60 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: main
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/eclipse-edc/Connector:
+      branch: main
+      repo: https://github.com/eclipse-edc/Connector
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/eclipse-edc/Connector git:
+        commands:
+        - /usr/bin/env sh .sqa/script.shabby-periwinkle-retriever.sh
+        container: qc.acc_queasy-wisteria-schnauzer
+  QC.Doc:
+    repos:
+      github.com/eclipse-edc/Connector find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.thirsty-eggplant-binturong.sh
+        container: qc.doc_flabby-taupe-hedgehog
+      github.com/eclipse-edc/Connector git:
+        commands:
+        - /usr/bin/env sh .sqa/script.smelly-bistre-zebu.sh
+        container: qc.doc_skinny-rose-opossum
+      github.com/eclipse-edc/Connector markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.zippy-charcoal-turkey.sh
+        container: qc.doc_beady-maroon-grasshopper
+  QC.Lic:
+    repos:
+      github.com/eclipse-edc/Connector licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.pokey-cobalt-lobster.sh
+        container: qc.lic_woozy-heliotrope-seahorse
+  QC.Sty:
+    repos:
+      github.com/eclipse-edc/Connector checkstyle:
+        commands:
+        - /usr/bin/env sh .sqa/script.pretty-alizarin-mastiff.sh
+        container: qc.sty_flabby-crimson-rattlesnake
+      github.com/eclipse-edc/Connector hadolint:
+        commands:
+        - /usr/bin/env sh .sqa/script.flimsy-wisteria-saola.sh
+        container: qc.sty_droopy-ultramarine-fousek
+      github.com/eclipse-edc/Connector jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.cozy-ultramarine-cockroach.sh
+        container: qc.sty_woolly-wisteria-kingfisher
+  QC.Ver:
+    repos:
+      github.com/eclipse-edc/Connector get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.jumpy-jade-dragonfly.sh
+        container: qc.ver_bumpy-flax-uguisu
+timeout: 5400
